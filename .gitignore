@@ -24,6 +24,9 @@ $RECYCLE.BIN/
 # OSX
 # =========================
 
+# temp files
+*.txt
+
 .DS_Store
 .AppleDouble
 .LSOverride
