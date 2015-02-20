@@ -91,6 +91,28 @@ if ( isset($_POST["submit"]) ) {
 					//printing the table.
 					echo '<table border="1" cellpadding="3" style="border-collapse: collapse" sortable="sortable">';
 					
+					//printing the combobox
+					echo "<tr>";
+					echo "<td>" . '' . "</td>";
+					for ( $k = 0; $k != ($num+1); $k++ ) {
+						echo '<td>'.'<select>';
+						echo '<option value="empty">-</option>';
+						echo '<option value="phone">טלפון סלולארי ראשי</option>';
+						echo '<option value="phone">טלפון סלולארי משני</option>';
+						echo '<option value="first_name">שם פרטי</option>';
+						echo '<option value="last_name">שם משפחה</option>';
+						echo '<option value="group_1">1 - קבוצה</option>';
+						echo '<option value="group_2">2 - קבוצה</option>';
+						echo '<option value="group_3">3 - קבוצה</option>';
+						echo '<option value="group_4">4 - קבוצה</option>';
+						echo '<option value="sex">מין</option>';
+						echo '<option value="language">שפה</option>';
+						echo '<option value="sex">מין</option>';
+						echo '<option value="date">תאריך</option>';
+						echo '</select>'.'</td>';
+					}
+					echo "</tr>";
+					
 					//printing the schema of the table
 					echo "<tr>";
 					echo "<td>" . '' . "</td>";
@@ -127,11 +149,19 @@ if ( isset($_POST["submit"]) ) {
 							echo "<td>" . '' . "</td>";
 							for( $i = 0; $i < $cols; $i++){
 								echo '<td>'.'<select>';
+								echo '<option value="empty">-</option>';
 								echo '<option value="phone">טלפון סלולארי ראשי</option>';
 								echo '<option value="phone">טלפון סלולארי משני</option>';
 								echo '<option value="first_name">שם פרטי</option>';
 								echo '<option value="last_name">שם משפחה</option>';
-								echo '<option value="group">קבוצה</option>';
+								echo '<option value="group_1">1 - קבוצה</option>';
+								echo '<option value="group_2">2 - קבוצה</option>';
+								echo '<option value="group_3">3 - קבוצה</option>';
+								echo '<option value="group_4">4 - קבוצה</option>';
+								echo '<option value="sex">מין</option>';
+								echo '<option value="language">שפה</option>';
+								echo '<option value="sex">מין</option>';
+								echo '<option value="date">תאריך</option>';
 								echo '</select>'.'</td>';
 							}
 							echo '</tr>';
