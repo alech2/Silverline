@@ -1,3 +1,10 @@
+<html lang="en">
+<head>
+<title>xxxxx</title>
+<meta name="Description" content="xxx">
+<meta charset="utf-8">
+</head>
+
 <style>
 table, th, td {
     border: 1px solid black;
@@ -116,8 +123,21 @@ if ( isset($_POST["submit"]) ) {
 					foreach( $xlsx->rows() as $k => $r) {
 				//		if ($k == 0) continue; // skip first row
 						echo '<tr>';
-						if ($k == 0){echo "<td>" . '' . "</td>";}
-						else {echo "<td>" . '<input type="checkbox" name="" value="" checked>' . "</td>";}
+						if ($k == 0){
+							echo "<td>" . '' . "</td>";
+							for( $i = 0; $i < $cols; $i++){
+								echo '<td>'.'<select>';
+								echo '<option value="phone">טלפון סלולארי ראשי</option>';
+								echo '<option value="phone">טלפון סלולארי משני</option>';
+								echo '<option value="first_name">שם פרטי</option>';
+								echo '<option value="last_name">שם משפחה</option>';
+								echo '<option value="group">קבוצה</option>';
+								echo '</select>'.'</td>';
+							}
+							echo '</tr>';
+							echo '<tr>';
+							echo "<td>" . '' . "</td>";							
+						}else {echo "<td>" . '<input type="checkbox" name="" value="" checked>' . "</td>";}
 						
 						for( $i = 0; $i < $cols; $i++)
 							echo '<td>'.( (isset($r[$i])) ? $r[$i] : '&nbsp;' ).'</td>';
