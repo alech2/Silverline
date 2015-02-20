@@ -86,6 +86,7 @@ if ( isset($_POST["submit"]) ) {
 					
 					//printing the schema of the table
 					echo "<tr>";
+					echo "<td>" . '' . "</td>";
 					for ( $k = 0; $k != ($num+1); $k++ ) {
 						echo "<td>" . $fields[$k] . "</td>";
 					}
@@ -94,6 +95,7 @@ if ( isset($_POST["submit"]) ) {
 					foreach ($dsatz as $key => $number) {
 								//new table row for every record
 						echo "<tr>";
+						echo "<td>" . '<input type="checkbox" name="" value="" checked>' . "</td>";
 						foreach ($number as $k => $content) {
 										//new table cell for every field of the record
 							echo "<td>" . $content . "</td>";
@@ -114,6 +116,9 @@ if ( isset($_POST["submit"]) ) {
 					foreach( $xlsx->rows() as $k => $r) {
 				//		if ($k == 0) continue; // skip first row
 						echo '<tr>';
+						if ($k == 0){echo "<td>" . '' . "</td>";}
+						else {echo "<td>" . '<input type="checkbox" name="" value="" checked>' . "</td>";}
+						
 						for( $i = 0; $i < $cols; $i++)
 							echo '<td>'.( (isset($r[$i])) ? $r[$i] : '&nbsp;' ).'</td>';
 						echo '</tr>';
