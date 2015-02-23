@@ -62,7 +62,14 @@ if ( isset($_POST["submit"]) ) {
 			
 			//checking what is the extention of the file that been uploaded.
 			$type = explode(".",$_FILES['file']['name']);
-
+			
+			
+			echo '<form action="insert_data_from_file.php" method="post">';
+			echo '<input type="submit" name="formSubmit" value="Submit" />';
+			
+			echo '<input type="text" name="f_name" value="'.$storagename.'" hidden>';
+			echo '<input type="text" name="f_type" value="'.end($type).'" hidden>';
+			
 			if (strtolower(end($type)) == 'csv'){
 				if ( $file = fopen( 'upload/' . $storagename , "r" ) ) {
 					$COMMA_SIGN=',';
@@ -88,6 +95,8 @@ if ( isset($_POST["submit"]) ) {
 						$i++;
 					}
 					
+ 
+
 					//printing the table.
 					echo '<table border="1" cellpadding="3" style="border-collapse: collapse" sortable="sortable">';
 					
@@ -95,7 +104,7 @@ if ( isset($_POST["submit"]) ) {
 					echo "<tr>";
 					echo "<td>" . '' . "</td>";
 					for ( $k = 0; $k != ($num+1); $k++ ) {
-						echo '<td>'.'<select>';
+						echo '<td>'.'<select name="col_'.$k.'">';
 						echo '<option value="empty">-</option>';
 						echo '<option value="phone">טלפון סלולארי ראשי</option>';
 						echo '<option value="phone">טלפון סלולארי משני</option>';
@@ -124,7 +133,8 @@ if ( isset($_POST["submit"]) ) {
 					foreach ($dsatz as $key => $number) {
 								//new table row for every record
 						echo "<tr>";
-						echo "<td>" . '<input type="checkbox" name="" value="" checked>' . "</td>";
+						$val = array_search($key,array_keys($dsatz)) + 1;
+						echo "<td>" . '<input type="checkbox" name="row_number[]" value="'.$val.'" checked>' . "</td>";
 						foreach ($number as $k => $content) {
 										//new table cell for every field of the record
 							echo "<td>" . $content . "</td>";
@@ -144,12 +154,13 @@ if ( isset($_POST["submit"]) ) {
 					
 					foreach( $xlsx->rows() as $k => $r) {
 				//		if ($k == 0) continue; // skip first row
+						// printing of the combobox 
 						echo '<tr>';
 						if ($k == 0){
 							echo "<td>" . '' . "</td>";
 							for( $i = 0; $i < $cols; $i++){
-								echo '<td>'.'<select>';
-								echo '<option value="empty">-</option>';
+								echo '<td>'.'<select name="col_'.$i.'">';
+								echo '<option value="-">-</option>';
 								echo '<option value="phone">טלפון סלולארי ראשי</option>';
 								echo '<option value="phone">טלפון סלולארי משני</option>';
 								echo '<option value="first_name">שם פרטי</option>';
@@ -166,9 +177,10 @@ if ( isset($_POST["submit"]) ) {
 							}
 							echo '</tr>';
 							echo '<tr>';
-							echo "<td>" . '' . "</td>";							
-						}else {echo "<td>" . '<input type="checkbox" name="" value="" checked>' . "</td>";}
-						
+							echo "<td>" . '' . "</td>";
+								// if $k != 0 it's data from table - not title row
+						}else {echo "<td>" . '<input type="checkbox" name="row_number[]" value="'.$k.'" checked>' . "</td>";}
+						// printing of table content
 						for( $i = 0; $i < $cols; $i++)
 							echo '<td>'.( (isset($r[$i])) ? $r[$i] : '&nbsp;' ).'</td>';
 						echo '</tr>';
@@ -176,16 +188,12 @@ if ( isset($_POST["submit"]) ) {
 					echo '</table>';
 			} else{
 				echo "Not supporting other then *.xlsx or *.csv files.";
-			}
+		}
+		echo '</form>';
 	} else {
 		echo "No file selected <br />";
 		return;
 	}
 }
-
-
-
-
-
 
 ?>
