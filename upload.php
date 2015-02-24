@@ -105,7 +105,7 @@ if ( isset($_POST["submit"]) ) {
 					echo "<td>" . '' . "</td>";
 					for ( $k = 0; $k != ($num+1); $k++ ) {
 						echo '<td>'.'<select name="col_'.$k.'">';
-						echo '<option value="empty">-</option>';
+						echo '<option value="-">-</option>';
 						echo '<option value="phone">טלפון סלולארי ראשי</option>';
 						echo '<option value="phone">טלפון סלולארי משני</option>';
 						echo '<option value="first_name">שם פרטי</option>';
