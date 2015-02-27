@@ -34,13 +34,13 @@ if ( isset($_POST["formSubmit"]) ) {
 			//printing of the table itself
 			$j = 0;
 			foreach ($dsatz as $key => $number) {
-						//new table row for every record
 				echo "<tr>";
 				$val = array_search($key,array_keys($dsatz));
+				//printing one row
 				if ($rows[$j] == $val){
 					if(!empty($rows[$val])){
 						foreach ($number as $k => $content) {
-										//new table cell for every field of the record
+							//printing of each column in a row
 							$col_num = 'col_'.array_search($k,array_keys($number));
 							if ($_POST[$col_num] != '-'){
 								echo "<td>".$content."</td>";
@@ -71,12 +71,11 @@ if ( isset($_POST["formSubmit"]) ) {
 			echo '<tr>';
 			if ($k != 0){
 				if(!empty($rows[$k])){
-					
+					//printing one row
 					if ($rows[$j] == $k){
-						
-						echo '<td>'.$k." ".$rows[$j].'</td>';
 						for( $i = 0; $i < $cols; $i++){
 							$col_num = 'col_'.$i;
+							//printing of each column in a row
 							if ($_POST[$col_num] != '-'){
 								echo '<td>'.( (isset($r[$i])) ? $r[$i] : '&nbsp;' ).'</td>';
 							}
