@@ -1,3 +1,10 @@
+<html lang="en">
+<head>
+<title>xxxxx</title>
+<meta name="Description" content="xxx">
+<meta charset="utf-8">
+</head>
+
 <a href="http://localhost/silverline/upload.php">link text</a>
 <a href="upload.php">index</a>
 
@@ -39,7 +46,7 @@ if ( isset($_POST["formSubmit"]) ) {
 				$val = array_search($key,array_keys($dsatz));
 				//printing one row
 				if ($rows[$j] == $val){
-					if(!empty($rows[$val])){
+					if(!empty($rows[$j])){
 						foreach ($number as $k => $content) {
 							//printing of each column in a row
 							$col_num = 'col_'.array_search($k,array_keys($number));
@@ -71,7 +78,7 @@ if ( isset($_POST["formSubmit"]) ) {
            
 			echo '<tr>';
 			if ($k != 0){
-				if(!empty($rows[$k])){
+				if(!empty($rows[$j])){
 					//printing one row
 					if ($rows[$j] == $k){
 						for( $i = 0; $i < $cols; $i++){
