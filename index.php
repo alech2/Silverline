@@ -10,7 +10,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<!-- Import CSS -->
-	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/rtl/main.css">
 	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery.easing.min.js"></script>
@@ -21,29 +21,9 @@
 </head>
 <!-- To change color change the class "color-1" to "color-2, color-3 ... color-6" -->
 <body class="home color-4">
-	<div id="header">
-		<div class="container">
 
-			<div class="row">
-
-					<i id="nav-button" class="icon-circle-arrow-down"></i>
-					<h2 id="logo"><a href="index.html">mrova <span class="highlight">Solutions</span></a></h2>
-				
-
-				<div id="top-nav" class="">
-					<ul id="fixed-nav">
-						<li class="current"><a href="#home">Home</a></li>
-						<li><a href="#services">Services</a></li>
-						<li><a href="#aboutus">About Us</a></li>
-						<li><a href="#login">Login</a></li>
-						<li><a href="#features">features</a></li>
-						<li><a href="#contact">Contact Us</a></li>
-					</ul>
-				</div>
-
-			</div>
-		</div>
-	</div><!-- End Header -->
+	<?php require_once("header.php"); ?>
+	
 	<!-- Big Full screen Banner -->
 	<div class="hero bg-fixed bg-color" id="home">
 
