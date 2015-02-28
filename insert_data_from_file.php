@@ -1,4 +1,5 @@
 <a href="http://localhost/silverline/upload.php">link text</a>
+<a href="upload.php">index</a>
 
 <?php
 require_once 'external_php_modules/simplexlsx.class.php';

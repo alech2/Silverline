@@ -14,6 +14,7 @@ th, td {
     text-align: left;
 }
 </style>
+<a href="index.php">index</a>
 <table width="600">
 <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" enctype="multipart/form-data">
 
