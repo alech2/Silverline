@@ -1,8 +1,35 @@
 <html lang="en">
 <head>
-<title>xxxxx</title>
-<meta name="Description" content="xxx">
-<meta charset="utf-8">
+	<title>xxxxx</title>
+	<meta name="Description" content="xxx">
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="HandheldFriendly" content="true">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Import CSS -->
+	<link rel="stylesheet" href="css/rtl/main.css">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.easing.min.js"></script>
+	<script src="js/jquery.scrollto.min.js"></script>
+	<script src="js/slabtext.min.js"></script>
+	<script src="js/jquery.nav.js"></script>
+	<script src="js/main.js"></script>
+
+	<script type="text/javascript">
+		function textCounter( field, countfield, maxlimit ) {
+			if ( field.value.length > maxlimit ) {
+				field.value = field.value.substring( 0, maxlimit );
+				field.blur();
+				field.focus();
+				return false;
+			} else {
+				countfield.value = maxlimit - field.value.length;
+			}
+		}
+	</script>
 </head>
 
 <style>
@@ -13,23 +40,60 @@ th, td {
     padding: 5px;
     text-align: left;
 }
+
+
+
+
 </style>
+<!-- To change color change the class "color-1" to "color-2, color-3 ... color-6" -->
+<body class="home color-2" >
+	
+	<?php require_once("header.php"); ?>
+
+	<div class="container">
+	<div class="content">
+		<div class="row">
+			<div class="span12">
+				<div class="title">
+					<h2>Gusts</h2>
+					<div class="hr hr-small hr-center"><span class="hr-inner"></span></div>
+					<p>...הלאה של רשימת אורחים/לקוחות לאתר</p>
+				</div>
+			</div>
+		</div>
+
+		<div style="direction: rtl;">
+			<table width="600">
+			<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" enctype="multipart/form-data">
+				<input type="file" name="file" id="file"/>
+				<br>
+				*בחר קובץ, המערכת תומכת בקבצים מסוג *.xlsx או *.csv .
+				<br><br>
+
+				<input type="submit" name="submit" class="btn btn-primary" value="העלה">
+			</form>
+			</table>
+
+
+
+
+
+
+
+		</div>
+	</div>
+	</div>
+	<?php require_once("footer.php"); ?>
+</body>
+</html>
+
+
+
+
+
+
 <a href="index.php">index</a>
-<table width="600">
-<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" enctype="multipart/form-data">
 
-<tr>
-<td width="20%">Select file, <br>Not supporting other then *.xlsx or *.csv files.</td>
-<td width="80%"><input type="file" name="file" id="file" /></td>
-</tr>
-
-<tr>
-<td>Submit</td>
-<td><input type="submit" name="submit" /></td>
-</tr>
-
-</form>
-</table>
 <?php
 require_once 'external_php_modules/simplexlsx.class.php';
 if ( isset($_POST["submit"]) ) {
