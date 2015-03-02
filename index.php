@@ -20,7 +20,7 @@
 	<script src="js/main.js"></script>
 </head>
 <!-- To change color change the class "color-1" to "color-2, color-3 ... color-6" -->
-<body class="home color-4">
+<body class="home color-2">
 
 	<?php require_once("header.php"); ?>
 	
@@ -138,6 +138,7 @@
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec volutpat, justo sed tincidunt iaculis, nisl enim rutrum dolor, in posuere purus risus vel quam. Quisque non feugiat erat. Mauris tristique id sem in blandit. Vestibulum pretium convallis orci. Suspendisse in aliquet leo. Donec ultricies fringilla augue, nec accumsan leo euismod et. Quisque non nisl non augue cursus rhoncus vel eget sem. Phasellus sed gravida nisi, ac lacinia dui. Aliquam pretium dapibus orci sed placerat. Nunc in condimentum massa, vitae consectetur ligula. Maecenas consequat in diam ut vulputate. Aenean vel ullamcorper elit.
 						</p>
 						<a href="upload.php">upload file</a>
+						<a href="create_message.php">create_message file</a>
 						<br><br><br><br><br><br><br><br><br><br><br><br>
 					</div>
 				</div>
@@ -265,8 +266,6 @@
 
 	</div>
 	<!-- End Contact Section -->
-	<div id="footer">
-		&copy; 2013 mRova Solutions. Designed with lots of love at <a id="attribution" href="http://www.mrova.com">mRova</a>.
-	</div>
+	<?php require_once("footer.php"); ?>
 </body>
 </html>

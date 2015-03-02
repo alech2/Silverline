@@ -132,7 +132,7 @@ body.color-2 div#top-nav #fixed-nav li.current a {
 	border-bottom: 3px solid #3498db;
 }
 body.color-2 .bg-color{
-	background: #3498db;
+	background: linear-gradient(135deg,#60C3ED 0,#016B9E 100%);
 }
 body.color-2 hr {
 	border-bottom: 1px solid #3498db;
