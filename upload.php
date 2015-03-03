@@ -34,12 +34,9 @@
 
 <style>
 table, th, td {
-    border: 1px solid black;
+    word-wrap: break-word;
 }
-th, td {
-    padding: 5px;
-    text-align: left;
-}
+
 
 
 
@@ -57,7 +54,7 @@ th, td {
 				<div class="title">
 					<h2>Gusts</h2>
 					<div class="hr hr-small hr-center"><span class="hr-inner"></span></div>
-					<p>...הלאה של רשימת אורחים/לקוחות לאתר</p>
+					<p>...העלאה של רשימת אורחים/לקוחות לאתר</p>
 				</div>
 			</div>
 		</div>
@@ -73,27 +70,23 @@ th, td {
 				<input type="submit" name="submit" class="btn btn-primary" value="העלה">
 			</form>
 			</table>
-
-
-
-
-
-
-
 		</div>
 	</div>
 	</div>
-	<?php require_once("footer.php"); ?>
-</body>
-</html>
 
+	<div class="container">
+	<div class="content">
+		<div class="row">
+			<div class="span12">
+				<div class="title">
+					<h2>Gusts</h2>
+					<div class="hr hr-small hr-center"><span class="hr-inner"></span></div>
+					<p>...הלאה של רשימת אורחים/לקוחות לאתר</p>
+				</div>
+			</div>
+		</div>
 
-
-
-
-
-<a href="index.php">index</a>
-
+		<div style="direction: rtl;">
 <?php
 require_once 'external_php_modules/simplexlsx.class.php';
 if ( isset($_POST["submit"]) ) {
@@ -163,16 +156,18 @@ if ( isset($_POST["submit"]) ) {
  
 
 					//printing the table.
-					echo '<table border="1" cellpadding="3" style="border-collapse: collapse" sortable="sortable">';
+					#echo '<table border="1" cellpadding="3" style="border-collapse: collapse" sortable="sortable">';
+					echo '<table class="table table-bordered table-striped" >';
 					
 					//printing the combobox
+					echo "<thead>";
 					echo "<tr>";
-					echo "<td>" . '' . "</td>";
+					echo "<th>" . '' . "</th>";
 					for ( $k = 0; $k != ($num+1); $k++ ) {
-						echo '<td>'.'<select name="col_'.$k.'">';
+						echo '<th>'.'<select name="col_'.$k.'" style="width:105;">';
 						echo '<option value="-">-</option>';
-						echo '<option value="phone">טלפון סלולארי ראשי</option>';
-						echo '<option value="phone">טלפון סלולארי משני</option>';
+						echo '<option value="phone">נייד ראשי</option>';
+						echo '<option value="phone">נייד משני</option>';
 						echo '<option value="first_name">שם פרטי</option>';
 						echo '<option value="last_name">שם משפחה</option>';
 						echo '<option value="group_1">1 - קבוצה</option>';
@@ -183,17 +178,20 @@ if ( isset($_POST["submit"]) ) {
 						echo '<option value="language">שפה</option>';
 						echo '<option value="sex">מין</option>';
 						echo '<option value="date">תאריך</option>';
-						echo '</select>'.'</td>';
+						echo '</select>'.'</th>';
 					}
 					echo "</tr>";
+					echo "</thead>";
 					
 					//printing the schema of the table
+					echo "<thead>";
 					echo "<tr>";
-					echo "<td>" . '' . "</td>";
+					echo "<th>" . '' . "</th>";
 					for ( $k = 0; $k != ($num+1); $k++ ) {
-						echo "<td>" . $fields[$k] . "</td>";
+						echo "<th>" . $fields[$k] . "</th>";
 					}
 					echo "</tr>";
+					echo "</thead>";
 					//printing of the table itself
 					foreach ($dsatz as $key => $number) {
 								//new table row for every record
@@ -213,21 +211,23 @@ if ( isset($_POST["submit"]) ) {
 			
 					$xlsx = new SimpleXLSX( 'upload/'.$storagename );
 					
-					echo '<table border="1" cellpadding="3" style="border-collapse: collapse" sortable="sortable">';
-					
+					#echo '<table border="1" cellpadding="3" style="border-collapse: collapse" sortable="sortable">';
+					echo '<table class="table table-bordered table-striped" >';
+
 					list($cols,) = $xlsx->dimension();
 					
 					foreach( $xlsx->rows() as $k => $r) {
 				//		if ($k == 0) continue; // skip first row
 						// printing of the combobox 
+						echo "<thead>";
 						echo '<tr>';
 						if ($k == 0){
-							echo "<td>" . '' . "</td>";
+							echo "<th>" . '' . "</th>";
 							for( $i = 0; $i < $cols; $i++){
-								echo '<td>'.'<select name="col_'.$i.'">';
+								echo '<th>'.'<select name="col_'.$i.'" style="width:105;">';
 								echo '<option value="-">-</option>';
-								echo '<option value="phone">טלפון סלולארי ראשי</option>';
-								echo '<option value="phone">טלפון סלולארי משני</option>';
+								echo '<option value="phone">נייד ראשי</option>';
+								echo '<option value="phone">נייד משני</option>';
 								echo '<option value="first_name">שם פרטי</option>';
 								echo '<option value="last_name">שם משפחה</option>';
 								echo '<option value="group_1">1 - קבוצה</option>';
@@ -238,16 +238,20 @@ if ( isset($_POST["submit"]) ) {
 								echo '<option value="language">שפה</option>';
 								echo '<option value="sex">מין</option>';
 								echo '<option value="date">תאריך</option>';
-								echo '</select>'.'</td>';
+								echo '</select>'.'</th>';
 							}
 							echo '</tr>';
+							echo "</thead>";
+
 							echo '<tr>';
-							echo "<td>" . '' . "</td>";
+							echo "<th>" . '' . "</th>";
 								// if $k != 0 it's data from table - not title row
 						}else {echo "<td>" . '<input type="checkbox" name="row_number[]" value="'.$k.'" checked>' . "</td>";}
 						// printing of table content
-						for( $i = 0; $i < $cols; $i++)
-							echo '<td>'.( (isset($r[$i])) ? $r[$i] : '&nbsp;' ).'</td>';
+						for( $i = 0; $i < $cols; $i++){
+							if ($k == 0) { echo '<th>'.( (isset($r[$i])) ? $r[$i] : '&nbsp;' ).'</th>'; }
+							else { echo '<td>'.( (isset($r[$i])) ? $r[$i] : '&nbsp;' ).'</td>'; }
+						}
 						echo '</tr>';
 					}
 					echo '</table>';
@@ -262,3 +266,13 @@ if ( isset($_POST["submit"]) ) {
 }
 
 ?>
+		</div>
+	</div>
+	</div>
+	<?php require_once("footer.php"); ?>
+</body>
+</html>
+
+
+
+
