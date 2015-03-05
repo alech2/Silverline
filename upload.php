@@ -79,7 +79,7 @@ table, th, td {
 		<div class="row">
 			<div class="span12">
 				<div class="title">
-					<h2>Gusts</h2>
+					<h2>Guests</h2>
 					<div class="hr hr-small hr-center"><span class="hr-inner"></span></div>
 					<p>...הלאה של רשימת אורחים/לקוחות לאתר</p>
 				</div>

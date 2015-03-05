@@ -49,7 +49,13 @@
 		</div>
 
 		<div style="direction: rtl;">
-		<h4 >אנא רשום הודעה:</h4>
+		<h4 style="display: inline;">הזן כותרת הסבר להודעה:   </h4>
+		<input name="msg_name" type="text" style="width:350px">
+		<h6>למשל: חתונה 05.08.2058, מבצע פורים 2015...</h6>
+		
+
+		<br>
+		<h4>אנא רשום הודעה:</h4>
 
 		<form>
 			נשארו עוד
