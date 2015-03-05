@@ -160,8 +160,8 @@ if ( isset($_POST["submit"]) ) {
 					echo '<table class="table table-bordered table-striped" >';
 					
 					//printing the combobox
-					echo "<thead>";
-					echo "<tr>";
+					// echo "<thead>";
+					// echo "<tr>";
 					echo "<th>" . '' . "</th>";
 					for ( $k = 0; $k != ($num+1); $k++ ) {
 						echo '<th>'.'<select name="col_'.$k.'" style="width:105;">';
@@ -180,8 +180,8 @@ if ( isset($_POST["submit"]) ) {
 						echo '<option value="date">תאריך</option>';
 						echo '</select>'.'</th>';
 					}
-					echo "</tr>";
-					echo "</thead>";
+					// echo "</tr>";
+					// echo "</thead>";
 					
 					//printing the schema of the table
 					echo "<thead>";
@@ -217,11 +217,11 @@ if ( isset($_POST["submit"]) ) {
 					list($cols,) = $xlsx->dimension();
 					
 					foreach( $xlsx->rows() as $k => $r) {
-				//		if ($k == 0) continue; // skip first row
-						// printing of the combobox 
-						echo "<thead>";
-						echo '<tr>';
+
+						
 						if ($k == 0){
+							// echo "<thead>";
+							// echo '<tr>';
 							echo "<th>" . '' . "</th>";
 							for( $i = 0; $i < $cols; $i++){
 								echo '<th>'.'<select name="col_'.$i.'" style="width:105;">';
@@ -239,20 +239,29 @@ if ( isset($_POST["submit"]) ) {
 								echo '<option value="sex">מין</option>';
 								echo '<option value="date">תאריך</option>';
 								echo '</select>'.'</th>';
+								// echo '</tr>';
+								// echo "</thead>";
 							}
-							echo '</tr>';
-							echo "</thead>";
+							
 
-							echo '<tr>';
-							echo "<th>" . '' . "</th>";
-								// if $k != 0 it's data from table - not title row
-						}else {echo "<td>" . '<input type="checkbox" name="row_number[]" value="'.$k.'" checked>' . "</td>";}
+							echo '<thead><tr><th>' . '' . "</th>";
+// echo "<th>'' . '' . "</th>";
+	// if $k != 0 it's data from table - not title row
+
+						}else {echo "<tr><td>" . '<input type="checkbox" name="row_number[]" value="'.$k.'" checked>' . "</td>";}
+
 						// printing of table content
 						for( $i = 0; $i < $cols; $i++){
-							if ($k == 0) { echo '<th>'.( (isset($r[$i])) ? $r[$i] : '&nbsp;' ).'</th>'; }
-							else { echo '<td>'.( (isset($r[$i])) ? $r[$i] : '&nbsp;' ).'</td>'; }
+							if ($k == 0) { 
+								echo '<th>'.( (isset($r[$i])) ? $r[$i] : '&nbsp;' ).'</th>'; 
+							}
+							else { 
+								echo '<td>'.( (isset($r[$i])) ? $r[$i] : '&nbsp;' ).'</td>'; 
+							}
 						}
 						echo '</tr>';
+						if ($k == 0) {echo "</thead>";}
+						
 					}
 					echo '</table>';
 			} else{
