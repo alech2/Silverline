@@ -49,23 +49,23 @@
 		</div>
 
 		<div style="direction: rtl;">
-		<h4 style="display: inline;">הזן כותרת הסבר להודעה:   </h4>
-		<input name="msg_name" type="text" style="width:350px">
-		<h6>למשל: חתונה 05.08.2058, מבצע פורים 2015...</h6>
-		
+			<h4 style="display: inline; margin-left: 50px;">הזן כותרת הסבר להודעה:   </h4>
+			<input name="msg_name" type="text" style="width:350px">
+			<h6>למשל: חתונה 05.08.2058, מבצע פורים 2015...</h6>
+			
 
-		<br>
-		<h4>אנא רשום הודעה:</h4>
+			<br>
+			<h4>אנא רשום הודעה:</h4>
 
-		<form>
-			נשארו עוד
-			<input onblur="textCounter(this.form.recipients,this,160);" style="width: 28px;" disabled  onfocus="this.blur();" tabindex="999" maxlength="3" size="3" value="160" name="counter">
-			תוים להודעה.<br>
-			<textarea onblur="textCounter(this,this.form.counter,160);" onkeyup="textCounter(this,this.form.counter,160);" style="WIDTH: 608px; HEIGHT: 270px;" name="message" rows="1" cols="15" >
-			</textarea>
-			<br><br>
-			<button type="button" class="btn btn-primary">בחר הודעה זו לשליחה</button>
-		</form>
+			<form>
+				נשארו עוד
+				<input onblur="textCounter(this.form.recipients,this,160);" style="width: 28px;" disabled  onfocus="this.blur();" tabindex="999" maxlength="3" size="3" value="160" name="counter">
+				תוים להודעה.<br>
+				<textarea onblur="textCounter(this,this.form.counter,160);" onkeyup="textCounter(this,this.form.counter,160);" style="WIDTH: 608px; HEIGHT: 270px;" name="message" rows="1" cols="15" >
+				</textarea>
+				<br><br>
+				<button type="button" class="btn btn-primary">בחר הודעה זו לשליחה</button>
+			</form>
 		</div>
 	</div>
 	</div>
