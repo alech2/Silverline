@@ -22,7 +22,11 @@
 <!-- To change color change the class "color-1" to "color-2, color-3 ... color-6" -->
 <body class="home color-2">
 
-	<?php require_once("header.php"); ?>
+	<?php
+
+require_once ("header.php");
+
+?>
 	
 	<!-- Big Full screen Banner -->
 	<div class="hero bg-fixed bg-color" id="home">
@@ -137,7 +141,20 @@
 						<p class="text-center">
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec volutpat, justo sed tincidunt iaculis, nisl enim rutrum dolor, in posuere purus risus vel quam. Quisque non feugiat erat. Mauris tristique id sem in blandit. Vestibulum pretium convallis orci. Suspendisse in aliquet leo. Donec ultricies fringilla augue, nec accumsan leo euismod et. Quisque non nisl non augue cursus rhoncus vel eget sem. Phasellus sed gravida nisi, ac lacinia dui. Aliquam pretium dapibus orci sed placerat. Nunc in condimentum massa, vitae consectetur ligula. Maecenas consequat in diam ut vulputate. Aenean vel ullamcorper elit.
 						</p>
-						<a href="upload.php">upload file</a>
+                              <div class="modal-body" style="margin: 0 auto; display: table;">
+                                  <form class="form col-md-12 center-block" method="post" action="menu.php">
+                                    <div class="form-group">
+                                      <input type="text" class="form-control input-lg" name="user" placeholder="UserName">
+                                    </div>
+                                    <div class="form-group">
+                                      <input type="password" class="form-control input-lg" name="pass" placeholder="Password">
+                                    </div>
+                                    <div class="form-group">
+                                      <input class="btn btn-primary btn-lg btn-block" type="submit" name="submit" style="width: 163px; margin-bottom: 20px;">Sign In</button>
+                                    </div>
+                                  </form>
+                              </div>
+                        <a href="upload.php">upload file</a>
 						<a href="create_message.php">create_message file</a>
 						<br><br><br><br><br><br><br><br><br><br><br><br>
 					</div>
@@ -266,6 +283,10 @@
 
 	</div>
 	<!-- End Contact Section -->
-	<?php require_once("footer.php"); ?>
+	<?php
+
+require_once ("footer.php");
+
+?>
 </body>
 </html>
