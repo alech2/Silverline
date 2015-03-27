@@ -1,292 +1,292 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8" />
+<?php
+/**
+ * CodeIgniter
+ *
+ * An open source application development framework for PHP
+ *
+ * This content is released under the MIT License (MIT)
+ *
+ * Copyright (c) 2014 - 2015, British Columbia Institute of Technology
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * @package	CodeIgniter
+ * @author	EllisLab Dev Team
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (http://ellislab.com/)
+ * @copyright	Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	http://codeigniter.com
+ * @since	Version 1.0.0
+ * @filesource
+ */
 
-	<title>mRova Solutions - One Page Template For Startups</title>
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<meta name="HandheldFriendly" content="true">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<!-- Import CSS -->
-	<link rel="stylesheet" href="css/rtl/main.css">
-	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-	<script src="js/jquery.min.js"></script>
-	<script src="js/jquery.easing.min.js"></script>
-	<script src="js/jquery.scrollto.min.js"></script>
-	<script src="js/slabtext.min.js"></script>
-	<script src="js/jquery.nav.js"></script>
-	<script src="js/main.js"></script>
-</head>
-<!-- To change color change the class "color-1" to "color-2, color-3 ... color-6" -->
-<body class="home color-2">
+/*
+ *---------------------------------------------------------------
+ * APPLICATION ENVIRONMENT
+ *---------------------------------------------------------------
+ *
+ * You can load different configurations depending on your
+ * current environment. Setting the environment also influences
+ * things like logging and error reporting.
+ *
+ * This can be set to anything, but default usage is:
+ *
+ *     development
+ *     testing
+ *     production
+ *
+ * NOTE: If you change these, also change the error_reporting() code below
+ */
+	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
-	<?php
+/*
+ *---------------------------------------------------------------
+ * ERROR REPORTING
+ *---------------------------------------------------------------
+ *
+ * Different environments will require different levels of error reporting.
+ * By default development will show errors but testing and live will hide them.
+ */
+switch (ENVIRONMENT)
+{
+	case 'development':
+		error_reporting(-1);
+		ini_set('display_errors', 1);
+	break;
 
-require_once ("header.php");
+	case 'testing':
+	case 'production':
+		ini_set('display_errors', 0);
+		if (version_compare(PHP_VERSION, '5.3', '>='))
+		{
+			error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
+		}
+		else
+		{
+			error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE);
+		}
+	break;
 
-?>
-	
-	<!-- Big Full screen Banner -->
-	<div class="hero bg-fixed bg-color" id="home">
+	default:
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'The application environment is not set correctly.';
+		exit(1); // EXIT_ERROR
+}
 
-		<div class="slogan">
-			<div  class="vcenter container">
+/*
+ *---------------------------------------------------------------
+ * SYSTEM FOLDER NAME
+ *---------------------------------------------------------------
+ *
+ * This variable must contain the name of your "system" folder.
+ * Include the path if the folder is not in the same directory
+ * as this file.
+ */
+	$system_path = 'system';
 
-				<div class="row">
+/*
+ *---------------------------------------------------------------
+ * APPLICATION FOLDER NAME
+ *---------------------------------------------------------------
+ *
+ * If you want this front controller to use a different "application"
+ * folder than the default one you can set its name here. The folder
+ * can also be renamed or relocated anywhere on your server. If
+ * you do, use a full server path. For more info please see the user guide:
+ * http://codeigniter.com/user_guide/general/managing_apps.html
+ *
+ * NO TRAILING SLASH!
+ */
+	$application_folder = 'application';
 
-					<div class="span12">
-						<h1>We Create Beautiful, Intuitive &amp; Powerful Web Applications</h1>
-					</div>
-				</div>
-			</div>
-		</div>
+/*
+ *---------------------------------------------------------------
+ * VIEW FOLDER NAME
+ *---------------------------------------------------------------
+ *
+ * If you want to move the view folder out of the application
+ * folder set the path to the folder here. The folder can be renamed
+ * and relocated anywhere on your server. If blank, it will default
+ * to the standard location inside your application folder. If you
+ * do move this, use the full server path to this folder.
+ *
+ * NO TRAILING SLASH!
+ */
+	$view_folder = '';
 
 
-	</div>
-	<!-- End Full screen banner  -->
-	<!-- Services Section -->
-	<!-- class section-alt is to give a different color please edit css/style.css to change the color -->
-	<div class="section section-alt" id="services">
-		<div class="container">
-			<div class="content">
-				<div class="row" >
-					<div class="title">
-						<h2>Our Services</h2>
-						<div class="hr hr-small hr-center"><span class="hr-inner"></span></div>
-						<p>We develop and market mobile application, websites and ecommerce solutions.</p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="span4 i-block">
-						<i class="icon-mobile-phone"></i>
-						<h3>Block-A</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec volutpat, justo sed tincidunt iaculis, nisl enim rutrum dolor, in posuere purus risus vel quam</p>
-					</div>
-					<div class="span4 i-block">
-						<i class="icon-star"></i>
-						<h3>Block-B</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec volutpat, justo sed tincidunt iaculis, nisl enim rutrum dolor, in posuere purus risus vel quam</p>
-					</div>
-					<div class="span4 i-block">
-						<i class="icon-thumbs-up-alt"></i>
-						<h3>Block-C</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec volutpat, justo sed tincidunt iaculis, nisl enim rutrum dolor, in posuere purus risus vel quam</p>
-					</div>
-				</div>
-				<div class="hr hr-invisible"></div>
-				<div class="row">
-					<div class="span4 i-block">
-						<i class="icon-briefcase"></i>
-						<h3>Block-D</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec volutpat, justo sed tincidunt iaculis, nisl enim rutrum dolor, in posuere purus risus vel quam</p>
-					</div>
-					<div class="span4 i-block">
-						<i class="icon-camera"></i>
-						<h3>Block-E</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec volutpat, justo sed tincidunt iaculis, nisl enim rutrum dolor, in posuere purus risus vel quam</p>
-					</div>
-					<div class="span4 i-block">
-						<i class="icon-desktop"></i>
-						<h3>Block-F</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec volutpat, justo sed tincidunt iaculis, nisl enim rutrum dolor, in posuere purus risus vel quam</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End Services Section -->
-	<!-- About Us section -->
-	<div class="section" id="aboutus">
-		<div class="container">
-			<div class="content">
-				<div class="row">
-					<div class="span12">
-						<div class="title">
-							<h2>About Us</h2>
-							<div class="hr hr-small hr-center"><span class="hr-inner"></span></div>
-							<p>The most important thing to us is building products people love.</p>
+/*
+ * --------------------------------------------------------------------
+ * DEFAULT CONTROLLER
+ * --------------------------------------------------------------------
+ *
+ * Normally you will set your default controller in the routes.php file.
+ * You can, however, force a custom routing by hard-coding a
+ * specific controller class/function here. For most applications, you
+ * WILL NOT set your routing here, but it's an option for those
+ * special instances where you might want to override the standard
+ * routing in a specific front controller that shares a common CI installation.
+ *
+ * IMPORTANT: If you set the routing here, NO OTHER controller will be
+ * callable. In essence, this preference limits your application to ONE
+ * specific controller. Leave the function name blank if you need
+ * to call functions dynamically via the URI.
+ *
+ * Un-comment the $routing array below to use this feature
+ */
+	// The directory name, relative to the "controllers" folder.  Leave blank
+	// if your controller is not in a sub-folder within the "controllers" folder
+	// $routing['directory'] = '';
 
-						</div>
-						<p class="text-center">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec volutpat, justo sed tincidunt iaculis, nisl enim rutrum dolor, in posuere purus risus vel quam. Quisque non feugiat erat. Mauris tristique id sem in blandit. Vestibulum pretium convallis orci. Suspendisse in aliquet leo. Donec ultricies fringilla augue, nec accumsan leo euismod et. Quisque non nisl non augue cursus rhoncus vel eget sem. Phasellus sed gravida nisi, ac lacinia dui. Aliquam pretium dapibus orci sed placerat. Nunc in condimentum massa, vitae consectetur ligula. Maecenas consequat in diam ut vulputate. Aenean vel ullamcorper elit.
-						</p>
-						<p class="text-center">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec volutpat, justo sed tincidunt iaculis, nisl enim rutrum dolor, in posuere purus risus vel quam. Quisque non feugiat erat. Mauris tristique id sem in blandit. Vestibulum pretium convallis orci. Suspendisse in aliquet leo. Donec ultricies fringilla augue, nec accumsan leo euismod et. Quisque non nisl non augue cursus rhoncus vel eget sem. Phasellus sed gravida nisi, ac lacinia dui. Aliquam pretium dapibus orci sed placerat. Nunc in condimentum massa, vitae consectetur ligula. Maecenas consequat in diam ut vulputate. Aenean vel ullamcorper elit.
-						</p>
-						<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-					</div>
-				</div>
-			</div>
-		</div> 
+	// The controller class file name.  Example:  mycontroller
+	// $routing['controller'] = '';
 
-	</div>
-	<!-- End About US -->
-	<!-- Log In section -->
-	<div class="section" id="login">
-		<div class="container">
-			<div class="content">
-				<div class="row">
-					<div class="span12">
-						<div class="title">
-							<h2>Login</h2>
-							<div class="hr hr-small hr-center"><span class="hr-inner"></span></div>
-							<p>The most important thing to us is building products people love.</p>
+	// The controller function you wish to be called.
+	// $routing['function']	= '';
 
-						</div>
-						<p class="text-center">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec volutpat, justo sed tincidunt iaculis, nisl enim rutrum dolor, in posuere purus risus vel quam. Quisque non feugiat erat. Mauris tristique id sem in blandit. Vestibulum pretium convallis orci. Suspendisse in aliquet leo. Donec ultricies fringilla augue, nec accumsan leo euismod et. Quisque non nisl non augue cursus rhoncus vel eget sem. Phasellus sed gravida nisi, ac lacinia dui. Aliquam pretium dapibus orci sed placerat. Nunc in condimentum massa, vitae consectetur ligula. Maecenas consequat in diam ut vulputate. Aenean vel ullamcorper elit.
-						</p>
-						<p class="text-center">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec volutpat, justo sed tincidunt iaculis, nisl enim rutrum dolor, in posuere purus risus vel quam. Quisque non feugiat erat. Mauris tristique id sem in blandit. Vestibulum pretium convallis orci. Suspendisse in aliquet leo. Donec ultricies fringilla augue, nec accumsan leo euismod et. Quisque non nisl non augue cursus rhoncus vel eget sem. Phasellus sed gravida nisi, ac lacinia dui. Aliquam pretium dapibus orci sed placerat. Nunc in condimentum massa, vitae consectetur ligula. Maecenas consequat in diam ut vulputate. Aenean vel ullamcorper elit.
-						</p>
-                              <div class="modal-body" style="margin: 0 auto; display: table;">
-                                  <form class="form col-md-12 center-block" method="post" action="menu.php">
-                                    <div class="form-group">
-                                      <input type="text" class="form-control input-lg" name="user" placeholder="UserName">
-                                    </div>
-                                    <div class="form-group">
-                                      <input type="password" class="form-control input-lg" name="pass" placeholder="Password">
-                                    </div>
-                                    <div class="form-group">
-                                      <input class="btn btn-primary btn-lg btn-block" type="submit" name="submit" style="width: 163px; margin-bottom: 20px;">Sign In</button>
-                                    </div>
-                                  </form>
-                              </div>
-                        <a href="upload.php">upload file</a>
-						<a href="create_message.php">create_message file</a>
-						<br><br><br><br><br><br><br><br><br><br><br><br>
-					</div>
-				</div>
-			</div>
-		</div> 
 
-	</div>
-	<!-- End Log In -->
-	<!-- Features Section -->
-	<div class="section section-alt" id="features">
-		<div class="container">
-			<div class="content">
-				<div class="row">
-					<div class="span12">
-						<div class="title">
-							<h2>Features</h2>
-							<div class="hr hr-small hr-center"><span class="hr-inner"></span></div>
-							<p>Heading, Buttons &amp; Font Awesome Icons.</p>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="span4">
-						<h1>Heading h1</h1>	
-						<h2>Heading h2</h2>	
-						<h3>Heading h3</h3>	
-						<h4>Heading h4</h4>	
-						<h5>Heading h5</h5>	
-						<h6>Heading h6</h6>	
-					</div>
-					<div class="span8">
-						<table class="table table-bordered table-striped">
-							<thead>
-								<tr>
-									<th>Button</th>
-									<th>class=""</th>
-									<th>Description</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><button type="button" class="btn">Default</button></td>
-									<td><code>btn</code></td>
-									<td>Standard gray button with gradient</td>
-								</tr>
-								<tr>
-									<td><button type="button" class="btn btn-primary">Primary</button></td>
-									<td><code>btn btn-primary</code></td>
-									<td>Provides extra visual weight and identifies the primary action in a set of buttons</td>
-								</tr>
-								<tr>
-									<td><button type="button" class="btn btn-info">Info</button></td>
-									<td><code>btn btn-info</code></td>
-									<td>Used as an alternative to the default styles</td>
-								</tr>
-								<tr>
-									<td><button type="button" class="btn btn-success">Success</button></td>
-									<td><code>btn btn-success</code></td>
-									<td>Indicates a successful or positive action</td>
-								</tr>
-								<tr>
-									<td><button type="button" class="btn btn-warning">Warning</button></td>
-									<td><code>btn btn-warning</code></td>
-									<td>Indicates caution should be taken with this action</td>
-								</tr>
-								<tr>
-									<td><button type="button" class="btn btn-danger">Danger</button></td>
-									<td><code>btn btn-danger</code></td>
-									<td>Indicates a dangerous or potentially negative action</td>
-								</tr>
-								<tr>
-									<td><button type="button" class="btn btn-inverse">Inverse</button></td>
-									<td><code>btn btn-inverse</code></td>
-									<td>Alternate dark gray button, not tied to a semantic action or use</td>
-								</tr>
-								<tr>
-									<td><button type="button" class="btn btn-link">Link</button></td>
-									<td><code>btn btn-link</code></td>
-									<td>Deemphasize a button by making it look like a link while maintaining button behavior</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+/*
+ * -------------------------------------------------------------------
+ *  CUSTOM CONFIG VALUES
+ * -------------------------------------------------------------------
+ *
+ * The $assign_to_config array below will be passed dynamically to the
+ * config class when initialized. This allows you to set custom config
+ * items or override any default config values found in the config.php file.
+ * This can be handy as it permits you to share one application between
+ * multiple front controller files, with each file containing different
+ * config values.
+ *
+ * Un-comment the $assign_to_config array below to use this feature
+ */
+	// $assign_to_config['name_of_config_item'] = 'value of config item';
 
-				</div>
-			</div>
-		</div>
-	</div> 
-	<!-- End Features -->
-	<!-- Contact Section -->
-	<div class="section" id="contact" >
-		<div class="container">
-			<div class="content">
-				<div class="row">
-					<div class="span12">
-						<div class="title">
-							<h2>Contact Us</h2>
-							<div class="hr hr-small hr-center"><span class="hr-inner"></span></div>
-							<p>We bring a personal and effective approach to every project we work on.</p>
 
-						</div>
-					</div>
-					<div class="span8">
-						<iframe width="100%" height="317" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.in/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=mRova+Solutions,+Pune,+Maharashtra&amp;aq=0&amp;oq=mrova&amp;sll=18.815427,76.775144&amp;sspn=14.731137,19.577637&amp;ie=UTF8&amp;hq=mRova+Solutions,&amp;hnear=Pune,+Maharashtra&amp;t=m&amp;ll=18.526817,73.903141&amp;spn=0.073244,0.132008&amp;z=13&amp;iwloc=A&amp;output=embed"></iframe>
-					</div>
-					<div class="span4">
-						<h4>Our Location</h4>
-						<p>F 4, Vidhi Apartment, Jambulkar Chowk, Near Camelia, Wanowari</p>
-						<hr class="grey"/>
-						<h4>Email &amp; Phone</h4>
-						<p>info@mrova.com</p>
-						<p>020-60600340</p>
-						<hr class="grey"/>
-						<h4>Socialize With Us</h4>
-						<div class="social">
-							<a href="#fb"><i class="icon-facebook-sign"></i></a>
-							<a href="#fb"><i class="icon-twitter-sign"></i></a>
-							<a href="#fb"><i class="icon-google-plus-sign"></i></a>
-						</div>
 
-					</div>
-				</div>
-			</div>
-		</div> 
+// --------------------------------------------------------------------
+// END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
+// --------------------------------------------------------------------
 
-	</div>
-	<!-- End Contact Section -->
-	<?php
+/*
+ * ---------------------------------------------------------------
+ *  Resolve the system path for increased reliability
+ * ---------------------------------------------------------------
+ */
 
-require_once ("footer.php");
+	// Set the current directory correctly for CLI requests
+	if (defined('STDIN'))
+	{
+		chdir(dirname(__FILE__));
+	}
 
-?>
-</body>
-</html>
+	if (($_temp = realpath($system_path)) !== FALSE)
+	{
+		$system_path = $_temp.'/';
+	}
+	else
+	{
+		// Ensure there's a trailing slash
+		$system_path = rtrim($system_path, '/').'/';
+	}
+
+	// Is the system path correct?
+	if ( ! is_dir($system_path))
+	{
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'Your system folder path does not appear to be set correctly. Please open the following file and correct this: '.pathinfo(__FILE__, PATHINFO_BASENAME);
+		exit(3); // EXIT_CONFIG
+	}
+
+/*
+ * -------------------------------------------------------------------
+ *  Now that we know the path, set the main path constants
+ * -------------------------------------------------------------------
+ */
+	// The name of THIS file
+	define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
+
+	// Path to the system folder
+	define('BASEPATH', str_replace('\\', '/', $system_path));
+
+	// Path to the front controller (this file)
+	define('FCPATH', dirname(__FILE__).'/');
+
+	// Name of the "system folder"
+	define('SYSDIR', trim(strrchr(trim(BASEPATH, '/'), '/'), '/'));
+
+	// The path to the "application" folder
+	if (is_dir($application_folder))
+	{
+		if (($_temp = realpath($application_folder)) !== FALSE)
+		{
+			$application_folder = $_temp;
+		}
+
+		define('APPPATH', $application_folder.DIRECTORY_SEPARATOR);
+	}
+	else
+	{
+		if ( ! is_dir(BASEPATH.$application_folder.DIRECTORY_SEPARATOR))
+		{
+			header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+			echo 'Your application folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
+			exit(3); // EXIT_CONFIG
+		}
+
+		define('APPPATH', BASEPATH.$application_folder.DIRECTORY_SEPARATOR);
+	}
+
+	// The path to the "views" folder
+	if ( ! is_dir($view_folder))
+	{
+		if ( ! empty($view_folder) && is_dir(APPPATH.$view_folder.DIRECTORY_SEPARATOR))
+		{
+			$view_folder = APPPATH.$view_folder;
+		}
+		elseif ( ! is_dir(APPPATH.'views'.DIRECTORY_SEPARATOR))
+		{
+			header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+			echo 'Your view folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
+			exit(3); // EXIT_CONFIG
+		}
+		else
+		{
+			$view_folder = APPPATH.'views';
+		}
+	}
+
+	if (($_temp = realpath($view_folder)) !== FALSE)
+	{
+		$view_folder = $_temp.DIRECTORY_SEPARATOR;
+	}
+	else
+	{
+		$view_folder = rtrim($view_folder, '/\\').DIRECTORY_SEPARATOR;
+	}
+
+	define('VIEWPATH', $view_folder);
+
+/*
+ * --------------------------------------------------------------------
+ * LOAD THE BOOTSTRAP FILE
+ * --------------------------------------------------------------------
+ *
+ * And away we go...
+ */
+require_once BASEPATH.'core/CodeIgniter.php';
