@@ -8,20 +8,43 @@ class Magazine extends CI_Controller {
 	*/
 	public function index(){
 
-		$data = array();
-		$this->load->model('Publication');
-		$this->load->model('Issue');
-		$publication = new Publication();
-		$issue = new Issue();
-		$publication->load(1);
-		$data['publication'] = $publication;
-		$issue->load(1);
-		$data['issue'] = $issue;
+		$this->load->view('bootstrap/header');
+		// View Table
+		$this->load->library('table');
+		$magazines = array();
+		$this->load->model(array('Issue','Publication'));
+		$issues = $this->Issue->get(); // get() - bring the whole table
+		foreach ($issues as $issue) {
+			$publication = new Publication();
+			$publication->load($issue->publication_id);
+			$magazines[] = array(
+				$publication->publication_name,
+				$issue->issue_number,
+				$issue->issue_date_publication,
+				);
+		}
 
-		$this->load->view('magazines');
-		$this->load->view('magazine', $data);
+		$this->load->view('magazines',array(
+			'magazines' => $magazines,
+			));
 
+		$this->load->view('bootstrap/footer');
 
+		/** example 2 - show single magazine **/
+		// $data = array();
+		// $this->load->model('Publication');
+		// $this->load->model('Issue');
+		// $publication = new Publication();
+		// $issue = new Issue();
+		// $publication->load(1);
+		// $data['publication'] = $publication;
+		// $issue->load(1);
+		// $data['issue'] = $issue;
+
+		// $this->load->view('magazines');
+		// $this->load->view('magazine', $data);
+
+		/** example 1 - echo object - not working with DB **/
 		// $this->load->model('Publication');
 		// $this->Publication->publication_name = 'Sandy Shore';
 		// $this->Publication->save();
@@ -41,6 +64,8 @@ class Magazine extends CI_Controller {
 	* Add a Magazine
 	*/
 	public function add() {
+		$this->load->helper('form');
+		$this->load->view('bootstrap/header');
 		
 		// LOAD LIST OF PUBLICATIONS FROM DB
 		$this->load->model('Publication');
@@ -69,7 +94,7 @@ class Magazine extends CI_Controller {
 						'rules' => 'required|callback_date_validation',
 					),
 			));
-		$this->form_validation->set_error_delimiters('<div class=""alert alert-error">','</div>');
+		$this->form_validation->set_error_delimiters('<div class="alert alert-error">','</div>');
 		
 		// validate form if is success
 		if (!$this->form_validation->run()) {
@@ -88,6 +113,7 @@ class Magazine extends CI_Controller {
 					'issue' => $issue,
 				));
 		}
+		$this->load->view('bootstrap/footer');
 	} 
 
 	/**
