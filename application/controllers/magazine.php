@@ -7,7 +7,7 @@ class Magazine extends CI_Controller {
 	*	Index page for magazine controller
 	*/
 	public function index(){
-
+		$this->load->helper('url');
 		$this->load->view('bootstrap/header');
 		// View Table
 		$this->load->library('table');
@@ -21,6 +21,11 @@ class Magazine extends CI_Controller {
 				$publication->publication_name,
 				$issue->issue_number,
 				$issue->issue_date_publication,
+				$issue->issue_cover ? 'Y' : 'N',
+				// adding links with anchor helper
+				anchor('magazine/view/' . $issue->issue_id, 'View') . '|' .
+				anchor('magazine/delete/' . $issue->issue_id, 'Delete')
+
 				);
 		}
 
@@ -64,7 +69,20 @@ class Magazine extends CI_Controller {
 	* Add a Magazine
 	*/
 	public function add() {
+
+		// LOAD FILES
+		$config = array(
+			'upload_path' => 'upload',
+			'allowed_types' => 'gif|jpg|png',
+			'max_size' => 250,
+			'max_width' => 1920,
+			'max_height' => 1080
+		);
+		$this->load->library('upload', $config);
+
+		// FORM
 		$this->load->helper('form');
+		// Bootstrap nav + style
 		$this->load->view('bootstrap/header');
 		
 		// LOAD LIST OF PUBLICATIONS FROM DB
@@ -96,8 +114,14 @@ class Magazine extends CI_Controller {
 			));
 		$this->form_validation->set_error_delimiters('<div class="alert alert-error">','</div>');
 		
-		// validate form if is success
-		if (!$this->form_validation->run()) {
+		// FILE UPLOAD VALIDATION
+		$check_file_upload = FALSE;
+		if (isset($_FILES['issue_cover']['error']) && $_FILES['issue_cover']['error'] != 4){
+			$check_file_upload = TRUE;
+		}
+
+		// validate form & file success
+		if (!$this->form_validation->run() || ($check_file_upload && !$this->upload->do_upload('issue_cover'))) {
 			// load form page - validation failed
 			$this->load->view('magazine_form', array(
 				'publication_form_options' => $publication_form_options,
@@ -108,6 +132,8 @@ class Magazine extends CI_Controller {
 			$issue->publication_id = $this->input->post('publication_id');
 			$issue->issue_number = $this->input->post('issue_number');
 			$issue->issue_date_publication = $this->input->post('issue_date_publication');
+			$upload_data = $this->upload->data();
+			$issue->issue_cover = ($upload_data['file_name']) ? $upload_data['file_name'] : ''; 
 			$issue->save();
 			$this->load->view('magazine_form_success', array(
 					'issue' => $issue,
@@ -131,5 +157,52 @@ class Magazine extends CI_Controller {
 			return TRUE;
 		}
 	}
+
+
+	/**
+	* View a magazine.
+	* @param string $issue_id
+	*/
+	public function view($issue_id) {
+		$this->load->helper('html');
+		// Bootstrap nav + style
+		$this->load->view('bootstrap/header');
+		$this->load->model(array('Issue', 'Publication'));
+		$issue = new Issue();
+		$issue->load($issue_id);
+		if (!$issue->issue_id) {
+			show_404();
+		}
+		$publication = new Publication();
+		$publication->load($issue->publication_id);
+		$this->load->view('magazine', array(
+			'issue' => $issue,
+			'publication' => $publication,
+			));
+		$this->load->view('bootstrap/footer');
+	}
+
+	/**
+	* View a magazine.
+	* @param string $issue_id
+	*/
+	public function delete($issue_id) {
+		// Bootstrap nav + style
+		$this->load->view('bootstrap/header');
+		$this->load->model(array('Issue'));
+		$issue = new Issue();
+		$issue->load($issue_id);
+		if (!$issue->issue_id) {
+			show_404();
+		}
+		$issue->delete();
+		$this->load->view('magazine_deleted', array(
+			'issue_id' => $issue_id,
+		));
+		$this->load->view('bootstrap/footer');
+	}
+
+
+
 
 } 

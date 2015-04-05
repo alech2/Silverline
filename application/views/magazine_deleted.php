@@ -1,0 +1,1 @@
+<div class="alert alert-success">Magazine # <?= html_escape($issue_id); ?> deleted.</div>

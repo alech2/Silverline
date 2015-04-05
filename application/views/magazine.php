@@ -6,4 +6,9 @@
 	<div class="date">
 		<?php echo html_escape($issue->issue_date_publication); ?>
 	</div>
+	<?php if($issue->issue_cover) { ?>
+		<div>
+			<?= img('upload/' . $issue->issue_cover); ?>
+		</div>
+	<?php } ?>
 </div>
